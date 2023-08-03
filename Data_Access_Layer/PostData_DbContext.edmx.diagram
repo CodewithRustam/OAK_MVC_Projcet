@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b605844951a845a5a6b92e987c8082d9" Name="Diagram1">
+        <EntityTypeShape EntityType="PostDataModel.Address" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.Ad" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.Category" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.Comment" Width="1.5" PointX="7.5" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.Contact" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.FavLogoTitle" Width="1.5" PointX="3" PointY="23.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.Log_Table" Width="1.5" PointX="3.375" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.Meta" Width="1.5" PointX="3" PointY="27" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.Post" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.PostImage" Width="1.5" PointX="10.5" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.PostTag" Width="1.5" PointX="10.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.ProcessType" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.SocialMedia" Width="1.5" PointX="3" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.T_User" Width="1.5" PointX="0.75" PointY="19.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PostDataModel.Video" Width="1.5" PointX="3" PointY="34.25" IsExpanded="true" />
+        <AssociationConnector Association="PostDataModel.FK__Address__LastUpd__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Ads__LastUpdateU__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Category__LastUp__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Post__CategoryId__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Comment__LastUpd__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Comment__PostID__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Contact__LastUpd__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__FavLogoTi__LastU__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Log_Table__Proce__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Meta__LastUpdate__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Post__LastUpdate__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__PostImage__PostI__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__PostTag__PostID__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__PostImage__LastU__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__PostTag__LastUpd__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__SocialMed__LastU__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="PostDataModel.FK__Video__LastUpdat__5629CD9C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

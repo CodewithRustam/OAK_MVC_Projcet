@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "UpdateFav";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model Data_Transfer_Layer.FavDataTransfer
+<section class="content-header">
+    <h1>Update Fav Logo Title</h1>
+    <ol class="breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Fav Logo Title</a></li>
+        <li class="breadcrumb-item"><a>Fav Logo Title</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <a type="submit" class="btn btn-primary" href="/Admin/Post/PostList">Post List</a>
+</div>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-9">
+            @Html.Partial("~/Areas/Admin/Views/Shared/_MessageForm.cshtml")
+            <div class="box box-primary">
+                @using (Html.BeginForm("UpdateFav", "Fav", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.Partial("PartialView/_FavForm")
+                }
+            </div>
+        </div>
+    </div>
+</section>

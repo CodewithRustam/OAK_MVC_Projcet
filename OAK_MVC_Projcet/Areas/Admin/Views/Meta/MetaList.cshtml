@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "MetaList";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@model List<Data_Transfer_Layer.MetaDataTransfer>
+<section class="content-header">
+    <h1>Meta List</h1>
+    <ol class="breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Meta</a></li>
+        <li class="breadcrumb-item"><a>Meta List</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <a type="submit" class="btn btn-primary" href="/Admin/Meta/AddMeta">Add Meta</a>
+</div>
+
+<!-- /.card -->
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">DataTable with default features</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead class="text-center">
+                <tr>
+                    <th>Name</th>
+                    <th>Meta Content</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tbody class="text-center">
+                    <tr id="a_@item.MetaID">
+                        <td>@item.Name</td>
+                        <td>@item.MetaContent</td>
+                        <td align="center" valign="middle">
+                            <a href="/Admin/Meta/UpdateMeta?ID=@item.MetaID">
+                                <br />
+                                <i class="fa-solid fa-repeat h3" style="color: #23d1ce;"></i>
+                            </a>
+                        </td>
+                        <td align="center" valign="middle">
+                            <a href="#">
+                                <br />
+                                <i class="fa-solid fa-circle-xmark h3" style="color: #cf0c0c;"></i>                           
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            }
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Meta Content</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- /.card -->

@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "AdsList";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model List<Data_Transfer_Layer.AdsDataTranfer>
+<section class="content-header">
+    <h1>Ads List</h1>
+    <ol class="breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Ads</a></li>
+        <li class="breadcrumb-item"><a>Ads List</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary" onclick="window.location.href='/Admin/Ads/AddAds'">Add Ads</button>
+</div>
+
+<!-- /.card -->
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">DataTable with default features</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead class="text-center">
+                <tr>
+                    <th>Name</th>
+                    <th>Link</th>
+                    <th>Image</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tbody class="text-center">
+                    <tr id="a_@item.AdsID">
+                        <td>@item.Name</td>
+                        <td>@item.Link</td>
+                        <td>
+                            <img src="~/Areas/Admin/Content/AdsImages/@item.ImagePath" width="60" height="60" style="border-radius:10px" />
+                        </td>
+                        <td align="center" valign="middle">
+                            <a href="/Admin/Ads/UpdateAds?ID=@item.AdsID">
+                                <br />
+                                <i class="fa-solid fa-repeat h3" style="color: #23d1ce;"></i>
+                            </a>
+                        </td>
+                        <td align="center" valign="middle">
+                            <a href="#">
+                                <br />
+                                <i class="fa-solid fa-circle-xmark h3" style="color: #cf0c0c;"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            }
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Link</th>
+                    <th>Image</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- /.card -->
