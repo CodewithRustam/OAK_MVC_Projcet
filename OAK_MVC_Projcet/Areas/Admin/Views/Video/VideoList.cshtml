@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "VideoList";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model List<Data_Transfer_Layer.VideoDataTransfer>
+<section class="content-header">
+    <h1>Video List</h1>
+    <ol class="breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Video</a></li>
+        <li class="breadcrumb-item"><a>Video List</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <button type="submit" class="btn btn-primary" onclick="window.location.href='/Admin/Video/AddVideo'">Add Video</button>
+</div>
+
+<!-- /.card -->
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">DataTable with default features</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead class="text-center">
+                <tr>
+                    <th>Title</th>
+                    <th>Video</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tbody class="text-center">
+                    <tr id="a_@item.VideoID">
+                        <td>@item.Title</td>
+                        <td>@item.OriginalVideoPath</td>
+
+                        <td align="center" valign="middle">
+                            <a href="/Admin/Video/UpdateVideo?ID=@item.VideoID">
+                                <br />
+                                <i class="fa-solid fa-repeat h3" style="color: #23d1ce;"></i>
+                            </a>
+                        </td>
+                        <td align="center" valign="middle">
+                            <a href="#">
+                                <br />
+                                <i class="fa-solid fa-circle-xmark h3" style="color: #cf0c0c;"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            }
+            <tfoot>
+                <tr>
+                    <th>Title</th>
+                    <th>Video</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+<!-- /.card -->

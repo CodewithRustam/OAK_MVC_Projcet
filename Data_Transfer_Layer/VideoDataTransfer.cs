@@ -15,6 +15,6 @@ namespace Data_Transfer_Layer
         public string OriginalVideoPath { get; set; }
         [Required(ErrorMessage ="Please enter Title")]
         public string Title { get; set; }
-        public DateTime AddDate { get; set; }
+        public DateTime? AddDate { get; set; }
     }
 }

@@ -21,7 +21,48 @@ namespace Business_Access_Layer
             video.LastUpdateDate = DateTime.Now;
             video.LastUpdateUserID = UserStatic.UserId;
             int id=dataAccess.AddVideoDataAccess(video);
-            throw new NotImplementedException();
+            if (id > 0)
+            {
+                LogDataAceess.AddLogData(General.ProcessType.VideoAdd, General.TableName.Video, id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateVideoBusiness(VideoDataTransfer model)
+        {
+            int id = dataAccess.UpdateVideoDataAccess(model);
+            if (id > 0)
+            {
+                LogDataAceess.AddLogData(General.ProcessType.VideoUpdate, General.TableName.Video, id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public List<VideoDataTransfer> VideoListBusiness()
+        {
+            List<VideoDataTransfer> videoDatas= new List<VideoDataTransfer>();
+            var videoList = dataAccess.VideoListDataAccess();
+            foreach (var video in videoList)
+            {
+                VideoDataTransfer videoData=new VideoDataTransfer();
+                videoData.Title= video.Title;
+                videoData.OriginalVideoPath= video.OriginalVideoPath;
+                videoData.VideoPath= video.VideoPath;
+                videoData.VideoID= video.VideoID;
+                videoData.AddDate= video.AddDate;
+                videoDatas.Add(videoData);
+            }
+            
+
+            return videoDatas;
         }
     }
 }
