@@ -34,7 +34,6 @@ namespace Data_Access_Layer
                 videoData.LastUpdateDate=DateTime.Now;
                 videoData.LastUpdateUserID=UserStatic.UserId;
                 videoData.VideoPath=video.VideoPath;
-                videoData.Title=video.Title;
                 dbcontext.SaveChanges();
                 return videoData.VideoID;
             }

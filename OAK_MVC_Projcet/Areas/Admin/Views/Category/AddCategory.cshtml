@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "AddCategory";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section class="content-header">
+    <h1>Add Category</h1>
+    <ol class="breadcrumb float-sm-left">
+        <li class="breadcrumb-item"><a>Admin</a></li>
+        <li class="breadcrumb-item"><a>Category</a></li>
+        <li class="breadcrumb-item"><a>Add Category</a></li>
+    </ol>
+</section>
+<br />
+<div class="card-footer">
+    <a type="submit" class="btn btn-primary" href="/Admin/Category/CategoryList">Category List</a>
+</div>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-9">
+            @Html.Partial("~/Areas/Admin/Views/Shared/_MessageForm.cshtml")
+            <div class="box box-primary">
+                @using (Html.BeginForm("AddCategory", "Category", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    @Html.Partial("PartialView/_CategoryForm")
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
