@@ -111,5 +111,20 @@ namespace Data_Access_Layer
                 throw ex;
             }
         }
+
+        public string DeleteUserDataAccess(int id)
+        {
+            T_User user=dbcontext.T_User.FirstOrDefault(x=>x.T_UserID==id);
+            if(user != null)
+            {
+                user.isDeleted = true;
+                user.DeletedDate= DateTime.Now;
+                user.LastUpdateDate= DateTime.Now;
+                user.LastUpdateUserID = UserStatic.UserId;
+                dbcontext.SaveChanges();
+                return user.ImagePath;
+            }
+            return user.ImagePath;
+        }
     }
 }

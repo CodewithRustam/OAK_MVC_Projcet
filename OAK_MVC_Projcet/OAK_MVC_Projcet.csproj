@@ -90,6 +90,7 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Content\css\adminlte.min.css" />
     <Content Include="Areas\Admin\Content\css\all.min.css" />
+    <Content Include="Areas\Admin\Content\css\bootstrap-4.min.css" />
     <Content Include="Areas\Admin\Content\css\bootstrap.min.css" />
     <Content Include="Areas\Admin\Content\css\dataTables.bootstrap4.min.css" />
     <Content Include="Areas\Admin\Content\css\icheck-bootstrap.min.css" />
@@ -519,10 +520,12 @@
     <Content Include="Areas\Admin\Content\js\ckeditor\vendor\promise.js" />
     <Content Include="Areas\Admin\Content\js\dataTables.bootstrap4.min.js" />
     <Content Include="Areas\Admin\Content\js\dataTables.responsive.min.js" />
+    <Content Include="Areas\Admin\Content\js\DeleteRecord.js" />
     <Content Include="Areas\Admin\Content\js\demo.js" />
     <Content Include="Areas\Admin\Content\js\jquery.dataTables.min.js" />
     <Content Include="Areas\Admin\Content\js\jquery.min.js" />
     <Content Include="Areas\Admin\Content\js\responsive.bootstrap4.min.js" />
+    <Content Include="Areas\Admin\Content\js\sweetalert2.min.js" />
     <Content Include="Areas\Admin\Content\tempimage\AdminLTELogo.png" />
     <Content Include="Areas\Admin\Content\tempimage\user1-128x128.jpg" />
     <Content Include="Areas\Admin\Content\tempimage\user2-160x160.jpg" />
@@ -544,7 +547,21 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\animate.css" />
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\classy-nav.css" />
+    <Content Include="Content\css\font-awesome.min.css" />
+    <Content Include="Content\css\magnific-popup.css" />
+    <Content Include="Content\css\nice-select.css" />
+    <Content Include="Content\css\owl.carousel.min.css" />
+    <Content Include="Content\css\themify-icons.css" />
+    <Content Include="Content\js\active.js" />
+    <Content Include="Content\js\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\js\bootstrap\popper.min.js" />
+    <Content Include="Content\js\jquery\jquery-2.2.4.min.js" />
+    <Content Include="Content\js\plugins\plugins.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\style.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -559,6 +576,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AddressController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\FavController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
@@ -567,6 +585,8 @@
     <Compile Include="Areas\Admin\Controllers\SocialMediaController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\VideoController.cs" />
+    <Compile Include="Areas\Models\Attributes\LoginControl.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -593,7 +613,6 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Meta\AddMeta.cshtml" />
     <Content Include="Areas\Admin\Views\Meta\PartialView\_MetaForm.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_MessageForm.cshtml" />
@@ -660,6 +679,28 @@
     <Content Include="Areas\Admin\Content\js\ckeditor\skins\moono-lisa\readme.md" />
     <Content Include="Areas\Admin\Views\Post\PostList.cshtml" />
     <Content Include="Areas\Admin\Views\Post\UpdatePost.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_ModalMessage.cshtml" />
+    <Content Include="Areas\Admin\Views\Post\Index.cshtml" />
+    <Content Include="Content\scss\backtotop.scss" />
+    <Content Include="Content\scss\blog.scss" />
+    <Content Include="Content\scss\breadcrumb.scss" />
+    <Content Include="Content\scss\buttons.scss" />
+    <Content Include="Content\scss\contact.scss" />
+    <Content Include="Content\scss\footer.scss" />
+    <Content Include="Content\scss\header.scss" />
+    <Content Include="Content\scss\heading.scss" />
+    <Content Include="Content\scss\hero.scss" />
+    <Content Include="Content\scss\mixins\_flex.scss" />
+    <Content Include="Content\scss\mixins\_miscellaneous.scss" />
+    <Content Include="Content\scss\preloader.scss" />
+    <Content Include="Content\scss\reboot.scss" />
+    <Content Include="Content\scss\spacing.scss" />
+    <Content Include="Content\scss\style.scss" />
+    <Content Include="Content\scss\utilities\_color.scss" />
+    <Content Include="Content\scss\utilities\_fonts.scss" />
+    <Content Include="Content\scss\utilities\_responsive.scss" />
+    <Content Include="Content\scss\utilities\_variables.scss" />
+    <Content Include="Content\scss\widget.scss" />
     <None Include="packages.config" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -667,6 +708,8 @@
     <Content Include="Scripts\bootstrap.esm.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Views\Shared\_HomeLayoutcshtml.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -682,7 +725,7 @@
     <Folder Include="Areas\Admin\Content\SocialMediaImages\" />
     <Folder Include="Areas\Admin\Content\UserImages\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

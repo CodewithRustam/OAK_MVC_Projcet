@@ -19,7 +19,7 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(UserDataTransfer userdata)
         {
-            if (ModelState.IsValid)
+            if (userdata.Username!=null && userdata.Password!=null)
             {
                UserDataTransfer userDataTransfer= userBusinessAccess.LoginUserNamePassword(userdata);
 

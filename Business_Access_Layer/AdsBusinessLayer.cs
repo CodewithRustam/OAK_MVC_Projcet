@@ -18,6 +18,7 @@ namespace Business_Access_Layer
             ads.Link = model.Link;
             ads.Size = model.ImageSize;
             ads.ImagePath = model.ImagePath;
+            ads.isDeleted = false;
             ads.AddDate = DateTime.Now;
             ads.LastUpdateDate = DateTime.Now;
             ads.LastUpdateUserID = UserStatic.UserId;
@@ -51,6 +52,17 @@ namespace Business_Access_Layer
                 adsList.Add(adsDataList);
             }
             return adsList;
+        }
+
+        public string DeleteAdsBusiness(int ID)
+        {
+            string imagePath=adsDataAccess.DeleteAdsDataAccess(ID);
+            LogDataAceess.AddLogData(General.ProcessType.AdsDelete, General.TableName.Ads, ID);
+            if (imagePath != null)
+            {
+                return imagePath;
+            }
+            return null;
         }
 
         public AdsDataTranfer GetAdByIdBusiness(int ID)

@@ -69,6 +69,8 @@
     <Compile Include="CategoryDataTransfer.cs" />
     <Compile Include="FavDataTransfer.cs" />
     <Compile Include="General.cs" />
+    <Compile Include="GeneralDataTransfer.cs" />
+    <Compile Include="HomeLayoutDataTransfer.cs" />
     <Compile Include="MetaDataTransfer.cs" />
     <Compile Include="PostDataTransfer.cs" />
     <Compile Include="PostImageDataTransfer.cs" />

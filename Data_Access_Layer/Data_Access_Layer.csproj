@@ -99,6 +99,7 @@
     <Compile Include="FavLogoTitle.cs">
       <DependentUpon>PostData_DbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="GeneralDataAccess.cs" />
     <Compile Include="LogDataAceess.cs" />
     <Compile Include="Log_Table.cs">
       <DependentUpon>PostData_DbContext.tt</DependentUpon>

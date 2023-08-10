@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class AdsController : Controller
+    public class AdsController : BaseController
     {
         AdsBusinessLayer adsBusinessLayer= new AdsBusinessLayer();
         public ActionResult AddAds()
@@ -122,6 +122,19 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
             }
 
             return View(userDetails);
+        }
+        [HttpPost]
+        public ActionResult DeleteAds(int ID)
+        {
+            string imagePath=adsBusinessLayer.DeleteAdsBusiness(ID);
+            if(imagePath!=null)
+            {
+                if (System.IO.File.Exists(Server.MapPath("~/Areas/Admin/Content/AdsImages/" + imagePath)))
+                {
+                    System.IO.File.Delete(Server.MapPath("~/Areas/Admin/Content/AdsImages/" + imagePath));
+                }
+            }
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 }

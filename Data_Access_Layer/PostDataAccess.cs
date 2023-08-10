@@ -49,6 +49,49 @@ namespace Data_Access_Layer
             return 0;
         }
 
+        public List<PostImageDataTransfer> DeletePostDataAccess(int ID)
+        {
+            Post post = dbcontext.Posts.FirstOrDefault(x => x.PostID == ID);
+            post.isDeleted = true;
+            post.DeletedDate = DateTime.Now;
+            post.LastUpdateDate = DateTime.Now;
+            post.LastUpdateUserID = UserStatic.UserId;
+            dbcontext.SaveChanges();
+
+            List<PostImage> imageList = dbcontext.PostImages.Where(x=>x.PostID== ID).ToList();
+            List<PostImageDataTransfer> postImageDataTransfer = new List<PostImageDataTransfer>();
+
+            foreach(var item in imageList)
+            {
+                PostImageDataTransfer postImageData=new PostImageDataTransfer();
+                postImageData.ImagePath= item.ImagePath;
+                item.isDeleted = true;
+                item.DeletedDate = DateTime.Now;
+                item.LastUpdateDate = DateTime.Now;
+                item.LastUpdateUserID = UserStatic.UserId;
+                postImageDataTransfer.Add(postImageData);
+            }
+            dbcontext.SaveChanges();
+            return postImageDataTransfer;
+        }
+
+        public string DeletePostImageDataAccess(int ID)
+        {
+            PostImage postImage = dbcontext.PostImages.FirstOrDefault(x => x.PostImageID == ID);
+            string imagePath = postImage.ImagePath;
+            postImage.isDeleted = true;
+            postImage.DeletedDate = DateTime.Now;
+            postImage.LastUpdateDate = DateTime.Now;
+            postImage.LastUpdateUserID = UserStatic.UserId;
+            dbcontext.SaveChanges();
+
+            if (imagePath != null)
+            {
+                return imagePath;
+            }
+            return imagePath;
+        }
+
         public void DeleteTags(int postID)
         {
             List<PostTag> postTags= dbcontext.PostTags.Where(x => x.PostID == postID).ToList();
@@ -60,6 +103,31 @@ namespace Data_Access_Layer
                 item.LastUpdateUserID= UserStatic.UserId;
             }
             dbcontext.SaveChanges();
+        }
+
+        public List<PostDataTransfer> GetHotNews()
+        {
+            var postList = dbcontext.Posts.Where(x => x.isDeleted == false).Join(dbcontext.Categories, p => p.CategoryId, c => c.CategoryID, (posts, categories) => new
+            {
+                ID = posts.PostID,
+                Title = posts.Title,
+                CategoryName = categories.CategoryName,
+                AddDate = posts.AddDate,
+                seoLink=posts.SeoLink
+            }).OrderByDescending(x => x.AddDate).Take(8).ToList();
+
+            List<PostDataTransfer> postDataTransfers = new List<PostDataTransfer>();
+            foreach (var item in postList)
+            {
+                PostDataTransfer post = new PostDataTransfer();
+                post.Title = item.Title;
+                post.ID = (int)item.ID;
+                post.CategoryName = item.CategoryName;
+                post.AddDate = (DateTime)item.AddDate;
+                post.SeoLink = item.seoLink;
+                postDataTransfers.Add(post);
+            }
+            return postDataTransfers;
         }
 
         public Post GetPostbyIDDataAccess(int iD)
@@ -74,7 +142,7 @@ namespace Data_Access_Layer
 
         public List<PostImage> GetpostImagesbyIDDataAccess(int iD)
         {
-            List<PostImage> listImages=dbcontext.PostImages.Where(x=>x.PostID== iD).ToList();
+            List<PostImage> listImages=dbcontext.PostImages.Where(x=>x.isDeleted==false && x.PostID== iD).ToList();
             if (listImages.Count > 0)
             {
                 return listImages;
@@ -94,7 +162,7 @@ namespace Data_Access_Layer
 
         public List<PostDataTransfer> PostListDataAccess()
         {
-            var postList=dbcontext.Posts.Join(dbcontext.Categories,p=>p.CategoryId,c=>c.CategoryID,(posts,                  categories) =>new
+            var postList=dbcontext.Posts.Where(x=>x.isDeleted==false).Join(dbcontext.Categories,p=>p.CategoryId,c=>c.CategoryID,(posts, categories) =>new
                          {
                              ID=posts.PostID,
                              Title=posts.Title,

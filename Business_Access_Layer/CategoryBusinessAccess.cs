@@ -24,6 +24,7 @@ namespace Business_Access_Layer
             category.CategoryName= model.CategoryName;
             category.AddDate = DateTime.Now;
             category.LastUpdateUserID =UserStatic.UserId;
+            category.isDeleted=false;
             int id=categoryDataAccess.AddCategoryDataAccess(category);
             if (id > 0)
             {
@@ -49,6 +50,29 @@ namespace Business_Access_Layer
             }
            return categories;
         }
+
+        PostBusinessAccess postBusiness=new PostBusinessAccess();
+        public List<PostImageDataTransfer> DeleteCategoryBusiness(int ID)
+        {
+            List<Post> postList=categoryDataAccess.DeleteCategoryDataAccess(ID);
+            LogDataAceess.AddLogData(General.ProcessType.CategoryDelete, General.TableName.Category, ID);
+            List<PostImageDataTransfer> listPostImage = new List<PostImageDataTransfer>(); 
+            if (postList.Count > 0)
+            {
+                foreach(var item in postList)
+                {
+                    List<PostImageDataTransfer> imageList = postBusiness.DeletePostBusiness(item.PostID);
+                    LogDataAceess.AddLogData(General.ProcessType.PostDelete, General.TableName.Post, item.PostID);
+                    foreach(var item1 in imageList)
+                    {
+                        listPostImage.Add(item1);
+                    }
+                }
+                return listPostImage;
+            }
+            return listPostImage;
+        }
+
         public bool UpdateCategoryBusiness(CategoryDataTransfer model)
         {
             int id = categoryDataAccess.UpdateCategoryDataAccess(model);

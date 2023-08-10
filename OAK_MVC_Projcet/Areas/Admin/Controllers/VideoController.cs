@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class VideoController : Controller
+    public class VideoController : BaseController
     {
         VideoBusinessLayer videoBusinessLayer=new VideoBusinessLayer();
         // GET: Admin/Video
@@ -86,6 +86,13 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
                 }
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteVideo(int ID)
+        {
+            videoBusinessLayer.DeleteVideoBusiness(ID);
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 

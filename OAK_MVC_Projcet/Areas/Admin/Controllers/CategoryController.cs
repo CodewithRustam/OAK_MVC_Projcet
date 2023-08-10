@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         CategoryBusinessAccess categoryBusinessLayer = new CategoryBusinessAccess();
         public ActionResult AddCategory()
@@ -75,6 +75,20 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
                 }
             }
             return View(model);
+        }
+        [HttpPost]
+        public ActionResult DeleteCategory(int ID)
+        {
+            List<PostImageDataTransfer> imageList = categoryBusinessLayer.DeleteCategoryBusiness(ID);
+            foreach (var image in imageList)
+            {
+                if (System.IO.File.Exists(Server.MapPath("~/Areas/Admin/Content/PostImage/" + image.ImagePath)))
+                {
+                    System.IO.File.Delete(Server.MapPath("~/Areas/Admin/Content/PostImage/" + image.ImagePath));
+                }
+            }
+
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 }

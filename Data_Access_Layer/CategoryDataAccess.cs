@@ -38,7 +38,7 @@ namespace Data_Access_Layer
         }
         public List<Category> CategoryListDataAccess()
         {
-            List <Category > categories=dbcontext.Categories.OrderByDescending(x=>x.AddDate).ToList();
+            List <Category > categories=dbcontext.Categories.Where(x=>x.isDeleted==false).OrderByDescending(x=>x.AddDate).ToList();
             if(categories.Count > 0)
             {
                 return categories;
@@ -47,6 +47,25 @@ namespace Data_Access_Layer
             {
                 return null;
             }
+        }
+
+        public List<Post> DeleteCategoryDataAccess(int ID)
+        {
+            Category category= dbcontext.Categories.FirstOrDefault(x=>x.CategoryID == ID);
+            if (category != null)
+            {
+                category.isDeleted = true;
+                category.DeletedDate = DateTime.Now;
+                category.LastUpdateDate = DateTime.Now;
+                category.LastUpdateUserID = UserStatic.UserId;
+                dbcontext.SaveChanges();
+            }
+            List<Post> postList= dbcontext.Posts.Where(x=>x.isDeleted==false && x.CategoryId==ID).ToList();
+            if (postList.Count > 0)
+            {
+                return postList;
+            }
+            return postList;
         }
 
         public int UpdateCategoryDataAccess(CategoryDataTransfer model)

@@ -49,7 +49,7 @@
                         <td align="center" valign="middle">
                             <a href="#">
                                 <br />
-                                <i class="fa-solid fa-circle-xmark h3" style="color: #cf0c0c;"></i>                           
+                                <i class="fa-solid fa-circle-xmark h3" style="color: #cf0c0c;" onclick="AskQuestion('/Admin/Meta/DeleteMeta/',@item.MetaID)"></i>                           
                             </a>
                         </td>
                     </tr>
@@ -66,5 +66,7 @@
             </tfoot>
         </table>
     </div>
+    @Html.Partial("~/Areas/Admin/Views/Shared/_ModalMessage.cshtml")
 </div>
 <!-- /.card -->
+<script src="~/Areas/Admin/Content/js/DeleteRecord.js"></script>

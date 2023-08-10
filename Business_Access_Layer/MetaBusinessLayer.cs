@@ -34,6 +34,12 @@ namespace Business_Access_Layer
 
         }
 
+        public void DeleteMetaBusinessLayer(int ID)
+        {
+            metaDataAccess.DeleteMetaDataAccess(ID);
+            LogDataAceess.AddLogData(General.ProcessType.MetaDelete, General.TableName.Meta, ID);
+        }
+
         public MetaDataTransfer GetMetaDataWithIDBusiness(int ID)
         {
             MetaDataTransfer metaDataTransfer = new MetaDataTransfer();

@@ -56,6 +56,12 @@ namespace Business_Access_Layer
             return addressDataList;
         }
 
+        public void DeleteAddressBusiness(int ID)
+        {
+            addressDataAccess.DeleteAddressDataAccess(ID);
+            LogDataAceess.AddLogData(General.ProcessType.AddressDelete, General.TableName.Address, ID);
+        }
+
         public AddreesDataTransfer GetAddressByIdBusiness(int iD)
         {
             AddreesDataTransfer addreesDataTransfer = new AddreesDataTransfer();

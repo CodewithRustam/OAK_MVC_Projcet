@@ -28,7 +28,7 @@ namespace Data_Access_Layer
         {
             try
             {
-                List<Address> addressList= dbcontext.Addresses.OrderBy(a => a.AddDate).ToList();
+                List<Address> addressList= dbcontext.Addresses.Where(x=>x.isDeleted==false).OrderBy(a => a.AddDate).ToList();
                 if(addressList.Count > 0)
                 {
                     return addressList;
@@ -39,6 +39,16 @@ namespace Data_Access_Layer
             {
                 throw ex;
             }
+        }
+
+        public void DeleteAddressDataAccess(int iD)
+        {
+            Address address= dbcontext.Addresses.FirstOrDefault(a => a.AddressID == iD);
+            address.isDeleted= true;
+            address.DeletedDate= DateTime.Now;
+            address.LastUpdateDate= DateTime.Now;
+            address.LastUpdateUserID= UserStatic.UserId;
+            dbcontext.SaveChanges();
         }
 
         public Address GetAddressByIDDataList(int ID)

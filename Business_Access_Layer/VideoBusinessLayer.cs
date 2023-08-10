@@ -32,6 +32,12 @@ namespace Business_Access_Layer
             }
         }
 
+        public void DeleteVideoBusiness(int ID)
+        {
+            dataAccess.DeleteVideoDataAccess(ID);
+            LogDataAceess.AddLogData(General.ProcessType.VideoDelete, General.TableName.Video, ID);
+        }
+
         public bool UpdateVideoBusiness(VideoDataTransfer model)
         {
             int id = dataAccess.UpdateVideoDataAccess(model);

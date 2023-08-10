@@ -24,6 +24,16 @@ namespace Data_Access_Layer
             }
         }
 
+        public void DeleteVideoDataAccess(int iD)
+        {
+            Video video=dbcontext.Videos.FirstOrDefault(x => x.VideoID == iD);
+            video.isDeleted = true;
+            video.DeletedDate = DateTime.Now;
+            video.LastUpdateDate = DateTime.Now;
+            video.LastUpdateUserID = UserStatic.UserId;
+            dbcontext.SaveChanges();
+        }
+
         public int UpdateVideoDataAccess(VideoDataTransfer video)
         {
             Video videoData=dbcontext.Videos.Where(x=>x.VideoID==video.VideoID).FirstOrDefault();
@@ -46,7 +56,7 @@ namespace Data_Access_Layer
         public List<Video> VideoListDataAccess()
         {
             List<Video> videoList = new List<Video>();
-            videoList=dbcontext.Videos.OrderByDescending(x=>x.AddDate).ToList();
+            videoList=dbcontext.Videos.Where(x=>x.isDeleted==false).OrderByDescending(x=>x.AddDate).ToList();
             if(videoList.Count>0 )
             {
                 return videoList;

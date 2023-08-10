@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class FavController : Controller
+    public class FavController : BaseController
     {
         FavBusinessAccess FavBusinessAccess=new FavBusinessAccess();
         // GET: Admin/Fav
@@ -43,14 +43,15 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
                         resizeImage.Save(Server.MapPath("~/Areas/Admin/Content/FavImage/" + filename));
                         model.Fav = filename;
                     }
+                    else
                     ViewBag.ProcessState = General.Message.ExtensionError;
                 }
 
-                if (model.FavImage != null)
+                if (model.LogoImage != null)
                 {
-                    HttpPostedFileBase postedFileLogo = model.FavImage;
+                    HttpPostedFileBase postedFileLogo = model.LogoImage;
                     Bitmap logoImage = new Bitmap(postedFileLogo.InputStream);
-                    Bitmap resizelogoImage = new Bitmap(logoImage, 100, 100);
+                    Bitmap resizelogoImage = new Bitmap(logoImage, 250, 250);
                     string extension = Path.GetExtension(postedFileLogo.FileName);
                     string logofile = "";
                     if (extension == ".jpg" || extension == ".png" || extension == ".jpeg" || extension == ".ico")
@@ -58,7 +59,7 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
                         string uniqueNumber = Guid.NewGuid().ToString();
                         logofile = uniqueNumber + postedFileLogo.FileName;
                         resizelogoImage.Save(Server.MapPath("~/Areas/Admin/Content/FavImage/" + logofile));
-                        model.Fav = logofile;
+                        model.Logo = logofile;
                     }
                     else
                     ViewBag.ProcessState = General.Message.ExtensionError;

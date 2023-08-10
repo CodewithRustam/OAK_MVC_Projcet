@@ -3,6 +3,7 @@ using Data_Transfer_Layer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -93,6 +94,13 @@ namespace Business_Access_Layer
                 LogDataAceess.AddLogData(General.ProcessType.UserUpdate, General.TableName.User, model.Id);
                 return imagePath;
             }
+            return imagePath;
+        }
+
+        public string DeleteUserBusiness(int id)
+        {
+            string imagePath = userDataAccess.DeleteUserDataAccess(id);
+            LogDataAceess.AddLogData(General.ProcessType.UserDelete, General.TableName.User, id);
             return imagePath;
         }
     }

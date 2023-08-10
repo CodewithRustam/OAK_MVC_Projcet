@@ -27,6 +27,23 @@ namespace Data_Access_Layer
             }
         }
 
+        public string DeleteSocialMediaDataAccess(int ID)
+        {
+            SocialMedia socialMedia = dbcontext.SocialMedias.FirstOrDefault(x => x.SocialMediaID == ID);
+            string imagePath = socialMedia.ImagePath;
+            socialMedia.isDeleted = true;
+            socialMedia.DeletedDate = DateTime.Now;
+            socialMedia.LastUpdateDate = DateTime.Now;
+            socialMedia.LastUpdateUserID = UserStatic.UserId;
+            dbcontext.SaveChanges();
+
+            if (imagePath != null)
+            {
+                return imagePath;
+            }
+            return imagePath;
+        }
+
         public SocialMedia GetSocialMediaByIdDataAccess(int ID)
         {
             try
@@ -49,7 +66,7 @@ namespace Data_Access_Layer
         {
             try
             {
-                List<SocialMedia> listSocial = dbcontext.SocialMedias.OrderBy(x => x.AddDate).ToList();
+                List<SocialMedia> listSocial = dbcontext.SocialMedias.Where(x=>x.isDeleted==false).OrderBy(x => x.AddDate).ToList();
                 if (listSocial.Count > 0)
                 {
                     return listSocial;

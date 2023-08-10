@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class MetaController : Controller
+    public class MetaController : BaseController
     {
         MetaBusinessLayer metaBusinessLayer = new MetaBusinessLayer();
         public ActionResult Index()
@@ -76,6 +76,12 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
                 
             }
             return View(metadataUpdate);
+        }
+        [HttpPost]
+        public JsonResult DeleteMeta(int ID)
+        {
+            metaBusinessLayer.DeleteMetaBusinessLayer(ID);
+            return Json("success",JsonRequestBehavior.AllowGet);
         }
     }
 }

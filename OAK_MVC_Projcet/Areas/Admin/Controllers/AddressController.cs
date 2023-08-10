@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class AddressController : Controller
+    public class AddressController : BaseController
     {
         AddressBusiness addressBusiness = new AddressBusiness();
         public ActionResult AddAddress()
@@ -88,6 +88,12 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
             }
 
             return View(userDetails);
+        }
+        [HttpPost]
+        public ActionResult DeleteAddress(int ID)
+        {
+            addressBusiness.DeleteAddressBusiness(ID);
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 }

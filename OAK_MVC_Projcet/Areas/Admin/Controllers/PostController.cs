@@ -10,9 +10,14 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class PostController : Controller
+    public class PostController : BaseController
     {
         PostBusinessAccess postBusinessLayer = new PostBusinessAccess();
+
+        public ActionResult Index()
+        {
+            return View();
+        }
         public ActionResult AddPost()
         {
             PostDataTransfer postDataTransfer = new PostDataTransfer();
@@ -148,6 +153,34 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
             }
             model.Categories = selectListItems;
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePostImage(int ID)
+        {
+            string imagePath=postBusinessLayer.DeletePostImageBusiness(ID);
+            if (imagePath != null)
+            {
+                if (System.IO.File.Exists(Server.MapPath("~/Areas/Admin/Content/PostImage/" + imagePath)))
+                {
+                    System.IO.File.Delete(Server.MapPath("~/Areas/Admin/Content/PostImage/" + imagePath));
+                }
+            }
+            return Json("success", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult DeletePost(int ID)
+        {
+            List<PostImageDataTransfer> imageList = postBusinessLayer.DeletePostBusiness(ID);
+            foreach(var image in imageList)
+            {
+                if (System.IO.File.Exists(Server.MapPath("~/Areas/Admin/Content/PostImage/" + image.ImagePath)))
+                {
+                    System.IO.File.Delete(Server.MapPath("~/Areas/Admin/Content/PostImage/" + image.ImagePath));
+                }
+            }
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 }

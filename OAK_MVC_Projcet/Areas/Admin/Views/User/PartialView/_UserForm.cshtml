@@ -11,10 +11,13 @@
         @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "Password" })
         @Html.ValidationMessageFor(x => x.Password, null, new { @class = "text-danger" })
     </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" name="isAdmin" checked="@Model.isAdmin" value="true">
-        <label class="form-check-label">is Admin?</label>
-    </div>
+    @if (Data_Transfer_Layer.UserStatic.isAdmin)
+    {
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="isAdmin" checked="@Model.isAdmin" value="true">
+            <label class="form-check-label">is Admin?</label>
+        </div>
+    }
     <div class="form-group">
         @Html.LabelFor(x => x.UserImage)
         <input type="file" class="form-control-file" name="UserImage" accept="image/gif, image/jpeg,image/png,image/jpg" onchange="$('#UserImage')[0].src = window.URL.createObjectURL(this.files[0])" />
@@ -39,7 +42,7 @@
         @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email" })
         @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
     </div>
-    <input type="hidden" name="Id" value="@Model.Id"/>
+    <input type="hidden" name="Id" value="@Model.Id" />
     <div class="card-footer">
         <button class="btn btn-primary">Save</button>
     </div>

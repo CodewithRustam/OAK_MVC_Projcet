@@ -31,6 +31,17 @@ namespace Business_Access_Layer
             return false;
         }
 
+        public string DeleteSocialMediaBusiness(int ID)
+        {
+            string imagePath = dataAccess.DeleteSocialMediaDataAccess(ID);
+            LogDataAceess.AddLogData(General.ProcessType.SocialDelete, General.TableName.Social, ID);
+            if (imagePath != null)
+            {
+                return imagePath;
+            }
+            return null;
+        }
+
         public SocialMediaDataTransfer GetSocialMediaByIdBusiness(int ID)
         {
             SocialMediaDataTransfer socialMediaData=new SocialMediaDataTransfer();

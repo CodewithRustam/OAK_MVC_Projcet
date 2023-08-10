@@ -36,7 +36,7 @@ namespace Data_Access_Layer
         {
             try
             {
-                List<Ad> listAds = dbcontext.Ads.OrderBy(x => x.AddDate).ToList();
+                List<Ad> listAds = dbcontext.Ads.Where(x=>x.isDeleted==false).OrderByDescending(x => x.AddDate).ToList();
                 if (listAds.Count > 0)
                 {
                     return listAds;
@@ -48,6 +48,23 @@ namespace Data_Access_Layer
                 throw ex;
             }
 
+        }
+
+        public string DeleteAdsDataAccess(int iD)
+        {
+            Ad ads = dbcontext.Ads.FirstOrDefault(x => x.AdsID == iD);
+            string imagePath = ads.ImagePath;
+            ads.isDeleted = true;
+            ads.DeletedDate = DateTime.Now;
+            ads.LastUpdateDate = DateTime.Now;
+            ads.LastUpdateUserID = UserStatic.UserId;
+            dbcontext.SaveChanges();
+
+            if (imagePath != null)
+            {
+                return imagePath;
+            }
+            return imagePath;
         }
 
         public Ad GetAdsByIdDataAccess(int iD)

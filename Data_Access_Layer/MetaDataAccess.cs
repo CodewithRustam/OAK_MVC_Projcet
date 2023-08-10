@@ -33,12 +33,29 @@ namespace Data_Access_Layer
 
         }
 
+        public void DeleteMetaDataAccess(int iD)
+        {
+            try
+            {
+                Meta meta=dbcontext.Metas.FirstOrDefault(x=>x.MetaID==iD);
+                meta.isDeleted= true;
+                meta.DeletedDate= DateTime.Now;
+                meta.LastUpdateDate= DateTime.Now;
+                meta.LastUpdateUserID= UserStatic.UserId;
+                dbcontext.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<MetaDataTransfer> GetMetaDataAccess()
         {
             List<MetaDataTransfer> metaDataTransferList = new List<MetaDataTransfer>();
             try
             {
-                List<Meta> metaList = dbcontext.Metas.OrderByDescending(x=>x.AddDate).ToList();
+                List<Meta> metaList = dbcontext.Metas.Where(x=>x.isDeleted==false).OrderByDescending(x=>x.AddDate).ToList();
 
                 foreach(Meta meta in metaList)
                 {

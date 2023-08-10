@@ -66,6 +66,8 @@
     <Compile Include="AdsBusinessLayer.cs" />
     <Compile Include="CategoryBusinessAccess.cs" />
     <Compile Include="FavBusinessAccess.cs" />
+    <Compile Include="GeneralBusinessLayer.cs" />
+    <Compile Include="LayoutBusinessLayer.cs" />
     <Compile Include="LogDataBusiness.cs" />
     <Compile Include="MetaBusinessLayer.cs" />
     <Compile Include="PostBusinessAccess.cs" />

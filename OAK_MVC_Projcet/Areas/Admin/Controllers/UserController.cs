@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         UserBusinessAccess userBusinessAccess=new UserBusinessAccess();
         public ActionResult AddUser()
@@ -123,6 +123,20 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
             }
 
             return View(userDetails);
+        }
+
+        public ActionResult DeleteUser(int id)
+        {
+           string imagePath= userBusinessAccess.DeleteUserBusiness(id);
+           if (imagePath != null)
+           {
+               if (System.IO.File.Exists(Server.MapPath("~/Areas/Admin/Content/UserImages/" + imagePath)))
+               {
+                   System.IO.File.Delete(Server.MapPath("~/Areas/Admin/Content/UserImages/" + imagePath));
+               }
+           
+           }
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 }

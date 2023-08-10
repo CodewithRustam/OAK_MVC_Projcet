@@ -12,7 +12,7 @@ namespace Data_Access_Layer
     {
         public FavLogoTitle GEtFavDataAccess()
         {
-            FavLogoTitle favLogoTitle = dbcontext.FavLogoTitles.FirstOrDefault();
+            FavLogoTitle favLogoTitle = dbcontext.FavLogoTitles.Where(x=>x.isDeleted==false).FirstOrDefault();
            if(favLogoTitle != null && favLogoTitle.FavLogoTitleID!=0)
            {
                 return favLogoTitle;
@@ -30,6 +30,8 @@ namespace Data_Access_Layer
                 fav.Fav = model.Fav;
                 fav.Logo = model.Logo;
                 fav.Title= model.Title;
+                fav.isDeleted = false;
+                fav.LastUpdateDate = DateTime.Now;
 
                 if (model.Logo != null)
                 {

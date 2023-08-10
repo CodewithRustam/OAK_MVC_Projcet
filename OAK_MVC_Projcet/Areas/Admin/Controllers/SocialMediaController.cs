@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 {
-    public class SocialMediaController : Controller
+    public class SocialMediaController : BaseController
     {
         SocialMediaBusinessLayer socialMediaBusiness = new SocialMediaBusinessLayer(); 
         public ActionResult AddSocialMedia()
@@ -121,6 +121,19 @@ namespace OAK_MVC_Projcet.Areas.Admin.Controllers
 
             return View(socialMediaData);
 
+        }
+        [HttpPost]
+        public ActionResult DeleteSocialMedia(int ID)
+        {
+            string imagePath = socialMediaBusiness.DeleteSocialMediaBusiness(ID);
+            if (imagePath != null)
+            {
+                if (System.IO.File.Exists(Server.MapPath("~/Areas/Admin/Content/SocialMediaImages/" + imagePath)))
+                {
+                    System.IO.File.Delete(Server.MapPath("~/Areas/Admin/Content/SocialMediaImages/" + imagePath));
+                }
+            }
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Business_Access_Layer
             post.Title=model.Title;
             post.PostContent=model.PostContent;
             post.ShortContent=model.ShortContent;
-            post.Slider=model.Slider;
+            post.Slider=true;
             post.Area1=model.Area1;
             post.Area2=model.Area2;
             post.Area3=model.Area3;
@@ -30,6 +30,7 @@ namespace Business_Access_Layer
             post.AddDate = DateTime.Now;
             post.LastUpdateUserID = UserStatic.UserId;
             post.LastUpdateDate = DateTime.Now;
+            post.isDeleted= false;
             int Id=postDataAccess.AddPostDataAccess(post);
             if (Id > 0)
             {
@@ -56,6 +57,7 @@ namespace Business_Access_Layer
                 tag.PostID=id;
                 tag.TagContent=item;
                 tag.AddDate=DateTime.Now;
+                tag.isDeleted= false;
                 tag.LastUpdateDate= DateTime.Now;
                 tag.LastUpdateUserID=UserStatic.UserId;
                 tagList.Add(tag);
@@ -66,9 +68,8 @@ namespace Business_Access_Layer
                 if (tagID > 0)
                 {
                     LogDataAceess.AddLogData(General.ProcessType.TagAdd, General.TableName.Tag, tagID);
-                    return tagID;
+                    
                 }
-                return tagID;
             }
             return tagID;
         }
@@ -82,6 +83,7 @@ namespace Business_Access_Layer
                 PostImage image = new PostImage();
                 image.PostID = id;
                 image.ImagePath = item.ImagePath;
+                image.isDeleted = false;
                 image.AddDate = DateTime.Now;
                 image.LastUpdateDate = DateTime.Now;
                 image.LastUpdateUserID = UserStatic.UserId;
@@ -93,9 +95,7 @@ namespace Business_Access_Layer
                 if (imageID > 0)
                 {
                     LogDataAceess.AddLogData(General.ProcessType.ImageAdd, General.TableName.Image, imageID);
-                    return imageID;
                 }
-                return imageID;
             }
             return imageID;
         }
@@ -165,12 +165,34 @@ namespace Business_Access_Layer
             }
             if (model.PostImages != null)
             {
-                SavePostImage(model.PostImages, ID);
+                SavePostImage(model.PostImages,ID);
             }
             postDataAccess.DeleteTags(ID);
             AddTag(model.TagText,ID);
 
             return true;
+        }
+
+        public string DeletePostImageBusiness(int ID)
+        {
+            string imagePath = postDataAccess.DeletePostImageDataAccess(ID);
+            LogDataAceess.AddLogData(General.ProcessType.ImageDelete, General.TableName.Image, ID);
+            if (imagePath != null)
+            {
+                return imagePath;
+            }
+            return null;
+        }
+
+        public List<PostImageDataTransfer> DeletePostBusiness(int ID)
+        {
+            List<PostImageDataTransfer> imageList = postDataAccess.DeletePostDataAccess(ID);
+            if(imageList != null && imageList.Count>0)
+            {
+                LogDataAceess.AddLogData(General.ProcessType.PostDelete, General.TableName.Post, ID);
+                return imageList;
+            }
+            return imageList;
         }
     }
 }
